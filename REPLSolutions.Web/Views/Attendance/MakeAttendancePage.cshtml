@@ -1,0 +1,51 @@
+﻿@model REPLSolutions.Web.ViewModels.AddAttendancePageViewModel
+
+@{
+    ViewBag.Title = "AddAttendance";
+}
+
+<h2>AddAttendance</h2>
+
+
+
+@using (Html.BeginForm("Save", "Customers"))
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Student First Name</th>
+
+                <th scope="col">Student First Name</th>
+                <th scope="col">Student MiddleName</th>
+                <th scope="col">Student Last Name</th>
+                <th scope="col">Present/ Absent</th>
+                <th scope="col">On Leave</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.AttendanceEntries)
+            {
+                <tr>
+                    <th scope="row">@item.Student.FirstName</th>
+                    <td>@item.Student.MiddleName</td>
+                    <td>@item.Student.LastName</td>
+                    <td>
+                        @Html.CheckBoxFor(m => item.Present)
+                    </td>
+                    <td> @Html.CheckBoxFor(m => item.Leave) </td>
+
+                </tr>
+
+            }
+
+
+        </tbody>
+    </table>
+}
+<label>Notes</label>
+@Html.TextAreaFor(m => m.Notes, new { @class = "form-control" })
+
+<br />
+<button type="submit" class="btn btn-primary">Submit </button>

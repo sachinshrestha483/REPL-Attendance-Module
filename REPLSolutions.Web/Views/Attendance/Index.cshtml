@@ -1,0 +1,119 @@
+﻿@model REPLSolutions.Web.ViewModels.ClassAndSectionListViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Attendance </h2>
+
+
+<div class="row justify-content-md-center">
+
+
+    <div class="col-md-4">
+
+
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+
+
+
+        @using (@Html.BeginForm("AddAttendance", "Attendance"))
+        {
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ClassAndSectionViewModel.classId)
+                @Html.DropDownListFor(m => m.ClassAndSectionViewModel.classId,
+               new SelectList(Model.classes, "Id", "Name"), "Select Class", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ClassAndSectionViewModel.classId,
+                        "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ClassAndSectionViewModel.sectionId)
+                @Html.DropDownListFor(m => m.ClassAndSectionViewModel.sectionId,
+               new SelectList(Model.sections, "Id", "Name"), "Select Class", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ClassAndSectionViewModel.sectionId,
+                         "", new { @class = "text-danger" })
+
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ClassAndSectionViewModel.attendanceDate)
+               
+        @Html.TextBoxFor(m => m.ClassAndSectionViewModel.attendanceDate, "{0:d MMM yyyy}", new { @class = "form-control",Type="date" })
+                @Html.ValidationMessageFor(m => m.ClassAndSectionViewModel.attendanceDate,
+                         "", new { @class = "text-danger" })
+
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+
+        }
+
+
+
+
+
+    </div>
+
+
+    <div class="col-md-4">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>&nbsp;&nbsp;Class&nbsp;Room&nbsp;Name&nbsp;&nbsp; </th>
+                    <th>&nbsp;&nbsp;Attendace&nbsp;of&nbsp;Date&nbsp;&nbsp; </th>
+                    <th>&nbsp;&nbsp;Attendace&nbsp;&nbsp;on&nbsp;&nbsp;Date&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;Notes&nbsp;&nbsp;</th>
+
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Attendances)
+                {
+                <tr>
+                    <td>@item.ClassRoom.Class.Name   @item.ClassRoom.Section.Name</td>
+                    <td>@item.AttendanceOfDate.ToShortDateString()</td>
+                    <td>@item.AttendanceOnDate</td>
+                    <td>@item.Note</td>
+
+
+                    <td><a href="/Attendance/UpdateAttendance/@item.Id" class="btn btn-primary">Edit</a></td>
+
+                </tr>
+                }
+
+
+                
+
+            </tbody>
+        </table>
+
+
+    </div>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+@section scripts
+{
+    
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    }

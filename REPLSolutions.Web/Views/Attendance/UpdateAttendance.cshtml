@@ -1,0 +1,59 @@
+﻿@model REPLSolutions.Web.ViewModels.UpdateAttendancePageViewModel
+@{
+    ViewBag.Title = "UpdateAttendance";
+}
+
+
+
+    <h2>UpdateAttendance for  @Model.ClassRoom.Class.Name   @Model.ClassRoom.Section.Name </h2>
+
+@using (Html.BeginForm("UpdateAttendance", "Attendance"))
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>StudentFirstname</th>
+                <th>StudentMiddlename</th>
+
+                <th>StudentLastname</th>
+                <th>Present/Absent</th>
+                <th>onLeave</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (int i = 0; i < Model.AttendanceEntries.Count(); i++)
+            {
+
+                <tr>
+                    <td>@Model.AttendanceEntries[i].Student.FirstName</td>
+                    <td>@Model.AttendanceEntries[i].Student.MiddleName</td>
+                    <td>@Model.AttendanceEntries[i].Student.LastName</td>
+
+                    <td>
+                        @Html.CheckBoxFor(m => Model.AttendanceEntries[i].Present)
+                    </td>
+
+                    <td>
+                        @Html.CheckBoxFor(m => Model.AttendanceEntries[i].Leave)
+                    </td>
+                </tr>
+                @Html.HiddenFor(m => Model.AttendanceEntries[i].StudentId)
+                @Html.HiddenFor(m => Model.AttendanceEntries[i].AttendanceId)
+                @Html.HiddenFor(m => Model.AttendanceEntries[i].Id)
+
+
+            }
+
+
+        </tbody>
+    </table>
+
+    @Html.TextAreaFor(m => m.Notes, new { @class = "form-control" })
+    @Html.HiddenFor(m => Model.AttendanceId)
+
+    <br />
+    <br />
+    <button type="submit" class="btn btn-primary">Update</button>
+}
