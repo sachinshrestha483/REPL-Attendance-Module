@@ -23,7 +23,8 @@ namespace REPLSolutions.Web.Controllers
         {
             var vm = new AcademicCalanderViewModel() {
                 CalanderRules = _context.AcademicCalander.ToList(),
-                 AcademicCalanderEvents=_context.AcademicCalanderEvents.ToList()
+                AcademicCalanderEvents = _context.AcademicCalanderEvents.ToList(),
+               
             };
 
 
@@ -33,10 +34,16 @@ namespace REPLSolutions.Web.Controllers
         [HttpPost]
         public ActionResult AddRules(AcademicCalanderViewModel obj)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Index", obj);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    var vm = new AcademicCalanderViewModel()
+            //    {
+            //        CalanderRules = _context.AcademicCalander.ToList(),
+            //        AcademicCalanderEvents = _context.AcademicCalanderEvents.ToList(),
+
+            //    };
+            //    return View("Index", vm);
+            //}
 
             if (obj.AcademicCalander.StartDate > obj.AcademicCalander.EndDate)
             {
@@ -47,13 +54,13 @@ namespace REPLSolutions.Web.Controllers
 
             // if attendance already exists......
 
-            
 
 
 
 
 
 
+            //obj.AcademicCalander.AcademicCalanderEventId = ;
 
             _context.AcademicCalander.Add(obj.AcademicCalander);
 
@@ -138,6 +145,7 @@ namespace REPLSolutions.Web.Controllers
                     if (latestRule.Id == rule.Id)
                     {
                         isThisRuleUsed = true;
+                        break;
                     }
 
 
@@ -165,7 +173,9 @@ namespace REPLSolutions.Web.Controllers
 
                 var vm = new AcademicCalanderViewModel()
                 {
-                    CalanderRules = _context.AcademicCalander.ToList()
+                    CalanderRules = _context.AcademicCalander.ToList(),
+                    AcademicCalanderEvents = _context.AcademicCalanderEvents.ToList(),
+
                 };
 
 

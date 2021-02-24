@@ -5,55 +5,145 @@
 
 
 
-    <h2>UpdateAttendance for  @Model.ClassRoom.Class.Name   @Model.ClassRoom.Section.Name </h2>
+<h2>UpdateAttendance for  @Model.ClassRoom.Class.Name   @Model.ClassRoom.Section.Name </h2>
+<br />
+<br />
+<br />
+<br />
+
 
 @using (Html.BeginForm("UpdateAttendance", "Attendance"))
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>StudentFirstname</th>
-                <th>StudentMiddlename</th>
-
-                <th>StudentLastname</th>
-                <th>Present/Absent</th>
-                <th>onLeave</th>
-
-            </tr>
-        </thead>
-        <tbody>
-
-            @for (int i = 0; i < Model.AttendanceEntries.Count(); i++)
-            {
-
-                <tr>
-                    <td>@Model.AttendanceEntries[i].Student.FirstName</td>
-                    <td>@Model.AttendanceEntries[i].Student.MiddleName</td>
-                    <td>@Model.AttendanceEntries[i].Student.LastName</td>
-
-                    <td>
-                        @Html.CheckBoxFor(m => Model.AttendanceEntries[i].Present)
-                    </td>
-
-                    <td>
-                        @Html.CheckBoxFor(m => Model.AttendanceEntries[i].Leave)
-                    </td>
-                </tr>
-                @Html.HiddenFor(m => Model.AttendanceEntries[i].StudentId)
-                @Html.HiddenFor(m => Model.AttendanceEntries[i].AttendanceId)
-                @Html.HiddenFor(m => Model.AttendanceEntries[i].Id)
 
 
-            }
+    <div class="row">
+
+        @for (int i = 0; i < Model.AttendanceEntries.Count; i++)
+        {
+            <div class="col-md-3 ">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div align="center">
+                            <img src="https://source.unsplash.com/random" width="200" height="200" />
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12 container">
+                        <div align="center">
+
+                            <h5 class="text-capitalize">@Model.AttendanceEntries[i].Student.FirstName @Model.AttendanceEntries[i].Student.MiddleName @Model.AttendanceEntries[i].Student.LastName</h5>
+                            @*<h3 class="text-capitalize">@Model.AttendanceEntries[i].Student.MiddleName</h3>
+                            <h3 class="text-capitalize">@Model.AttendanceEntries[i].Student.LastName</h3>*@
+                            @Html.HiddenFor(m => Model.AttendanceEntries[i].StudentId)
+                            @Html.HiddenFor(m => Model.AttendanceEntries[i].AttendanceId)
+                            @Html.HiddenFor(m => Model.AttendanceEntries[i].Id)
+                        </div>
+
+                        <div align="center">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <br />
+                                            
+
+                                            <span>Present</span>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            @Html.CheckBoxFor(m => Model.AttendanceEntries[i].Present,
+                                 new
+                                      {
+                                          @class = "form-control",
+                                     onclick = "presentClicked(" + @i + ");",
+                                     id = "p" + @i
+                                      })
+                                        </div>
+
+                                    </div>
+
+                                  
+                                </div>
+                                <div class="col-md-6">
+
+                                    <label>Leave</label>
+                                    @Html.CheckBoxFor(m => Model.AttendanceEntries[i].Leave,
+                                   new
+                                        {
+                                            @class = "form-control",
+                                       id = "l" + @i,
+                                       onclick = "leaveClicked(" + @i + ");"
+
+                                        })
+                                </div>
 
 
-        </tbody>
-    </table>
+                            </div>
+                          
+                            <br />
 
+                            <br />
+                           
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        }
+
+
+
+    </div>
+
+    <label>Notes</label>
     @Html.TextAreaFor(m => m.Notes, new { @class = "form-control" })
     @Html.HiddenFor(m => Model.AttendanceId)
 
     <br />
-    <br />
-    <button type="submit" class="btn btn-primary">Update</button>
+    <button type="submit" class="btn btn-primary">Submit </button>
+}
+
+
+
+@section Scripts{
+
+    <script>
+
+        //document.getElementById("myCheck").k = true;
+
+
+        function presentClicked(i) {
+            if (document.getElementById('p' + i).checked == true) {
+
+                document.getElementById('l' + i).checked == false
+
+                document.getElementById("l" + i).disabled = true
+            } else {
+                document.getElementById('l' + i).checked == false
+
+                document.getElementById("l" + i).disabled = false
+            }
+        }
+
+        function leaveClicked(i) {
+            if (document.getElementById('l' + i).checked == true) {
+                document.getElementById('p' + i).checked == false
+
+                document.getElementById("p" + i).disabled = true
+            } else {
+                document.getElementById("p" + i).disabled = false
+            }
+        }
+
+
+    </script>
+
+
 }

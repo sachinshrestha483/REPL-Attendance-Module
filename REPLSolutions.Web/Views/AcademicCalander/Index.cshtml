@@ -39,14 +39,14 @@
             </div>
 
 
-            @*<div class="form-group">
-                @Html.LabelFor(m => m.ClassAndSectionViewModel.sectionId)
-                @Html.DropDownListFor(m => m.ClassAndSectionViewModel.sectionId,
-               new SelectList(Model.sections, "Id", "Name"), "Select Class", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.ClassAndSectionViewModel.sectionId,
+            <div class="form-group">
+                @*@Html.LabelFor(m => m.AcademicCalander.AcademicCalanderEvent.Name)*@
+                @Html.DropDownListFor(m => m.AcademicCalander.AcademicCalanderEventId,
+               new SelectList(Model.AcademicCalanderEvents, "Id", "Name"), "Select Event", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.AcademicCalander.AcademicCalanderEventId,
                          "", new { @class = "text-danger" })
 
-            </div>*@
+            </div>
 
 
 
@@ -98,7 +98,9 @@
                 <tr>
                     <th scope="col">&nbsp;&nbsp;Start&nbsp;Date&nbsp;&nbsp;</th>
                     <th scope="col">&nbsp;&nbsp;End&nbsp;Date&nbsp;&nbsp;</th>
-                    <th scope="col">Rule</th>
+                    <th scope="col">Event</th>
+
+                    @*     <th scope="col">Rule</th>*@
                     <th scope="col">Flag</th>
                     <th scope="col">Delete</th>
 
@@ -110,53 +112,56 @@
             <tbody>
                 @foreach (var rule in Model.CalanderRules)
                 {
-                <tr>
-                    <th scope="row">@rule.StartDate.ToShortDateString()</th>
-                    <td>@rule.EndDate.ToShortDateString()</td>
-                    <td>@rule.AcademicCalanderRule.ToString()</td>
-                    @if (rule.flag)
-                    {
-                <td>
+                    <tr>
+                        <th scope="row">@rule.StartDate.ToShortDateString()</th>
+
+                        <td>@rule.EndDate.ToShortDateString()</td>
+                        <td>@rule.AcademicCalanderEvent.Name</td>
+
+                        @*       <td>@rule.AcademicCalanderRule.ToString()</td>*@
+                        @if (rule.flag)
+                        {
+                            <td>
 
 
-                    @using (@Html.BeginForm("FlagUnflagRule", "AcademicCalander"))
-                    {
-                        <input type="hidden" name="id" value="@rule.Id" />
+                                @using (@Html.BeginForm("FlagUnflagRule", "AcademicCalander"))
+                                {
+                                    <input type="hidden" name="id" value="@rule.Id" />
 
-                        <button type="submit" class="btn btn-primary">Flagged</button>
+                                    <button type="submit" class="btn btn-primary">Flagged</button>
 
-                    }
+                                }
 
-                </td>
+                            </td>
 
-                    }
-                    else
-                    {
-                <td>
+                        }
+                        else
+                        {
+                            <td>
 
-                    @using (@Html.BeginForm("FlagUnflagRule", "AcademicCalander"))
-                    {
-                        <input type="hidden" name="id" value="@rule.Id" />
- 
-                        <button type="submit"  class="btn btn-primary">Unflagged</button>
+                                @using (@Html.BeginForm("FlagUnflagRule", "AcademicCalander"))
+                                {
+                                    <input type="hidden" name="id" value="@rule.Id" />
 
-                    }
+                                    <button type="submit" class="btn btn-primary">Unflagged</button>
+
+                                }
 
 
-                </td>
+                            </td>
 
-                    }
-                <td>
-                    @using (@Html.BeginForm("DeleteRule", "AcademicCalander"))
-                    {
-                        <input type="hidden" name="id" value="@rule.Id" />
+                        }
+                        <td>
+                            @using (@Html.BeginForm("DeleteRule", "AcademicCalander"))
+                            {
+                                <input type="hidden" name="id" value="@rule.Id" />
 
-                        <button type="submit" class="btn btn-primary">Delete</button>
+                                <button type="submit" class="btn btn-primary">Delete</button>
 
-                    }
-                </td>
+                            }
+                        </td>
 
-                </tr>
+                    </tr>
 
                 }
 
@@ -165,7 +170,7 @@
         </table>
 
 
-      
+
 
 
     </div>
@@ -183,7 +188,7 @@
 
 @section scripts
 {
-
+  
     @Scripts.Render("~/bundles/jqueryval")
 
 }

@@ -40,12 +40,11 @@ namespace REPLSolutions.Web.Models
         public DateTime EndDate { get; set; }
 
         public string Note { get; set; }
-        [Required]
-        [Display(Name = "Calander Rule")]
 
 
 
         public AcademicCalanderEvent AcademicCalanderEvent{ get; set; }
+        [Display(Name = "Calander Rule")]
 
         public int AcademicCalanderEventId { get; set; }
 

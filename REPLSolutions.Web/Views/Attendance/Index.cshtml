@@ -3,117 +3,167 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Attendance </h2>
 
+<br />
+<br />
+<br />
+<br />
 
-<div class="row justify-content-md-center">
-
-
-    <div class="col-md-4">
-
-
-        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-
-
-
-
-        @using (@Html.BeginForm("AddAttendance", "Attendance"))
-        {
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.ClassAndSectionViewModel.classId)
-                @Html.DropDownListFor(m => m.ClassAndSectionViewModel.classId,
-               new SelectList(Model.classes, "Id", "Name"), "Select Class", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.ClassAndSectionViewModel.classId,
-                        "", new { @class = "text-danger" })
-            </div>
-
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.ClassAndSectionViewModel.sectionId)
-                @Html.DropDownListFor(m => m.ClassAndSectionViewModel.sectionId,
-               new SelectList(Model.sections, "Id", "Name"), "Select Class", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.ClassAndSectionViewModel.sectionId,
-                         "", new { @class = "text-danger" })
-
-            </div>
-
-
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.ClassAndSectionViewModel.attendanceDate)
-               
-        @Html.TextBoxFor(m => m.ClassAndSectionViewModel.attendanceDate, "{0:d MMM yyyy}", new { @class = "form-control",Type="date" })
-                @Html.ValidationMessageFor(m => m.ClassAndSectionViewModel.attendanceDate,
-                         "", new { @class = "text-danger" })
-
-            </div>
-
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-
-
-        }
-
-
-
-
-
+<div class="panel panel-primary mt-5 ">
+    <div class="panel-heading">
+        <h3 class="panel-title">Attendance</h3>
     </div>
 
+    <div class="panel-body">
+        <div class="row justify-content-md-center">
 
-    <div class="col-md-4">
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>&nbsp;&nbsp;Class&nbsp;Room&nbsp;Name&nbsp;&nbsp; </th>
-                    <th>&nbsp;&nbsp;Attendace&nbsp;of&nbsp;Date&nbsp;&nbsp; </th>
-                    <th>&nbsp;&nbsp;Attendace&nbsp;&nbsp;on&nbsp;&nbsp;Date&nbsp;&nbsp;</th>
-                    <th>&nbsp;&nbsp;Notes&nbsp;&nbsp;</th>
+            <div class="col-md-4">
 
-                    <th>Edit</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Attendances)
+
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+
+
+
+                @using (@Html.BeginForm("AddAttendance", "Attendance"))
                 {
-                <tr>
-                    <td>@item.ClassRoom.Class.Name   @item.ClassRoom.Section.Name</td>
-                    <td>@item.AttendanceOfDate.ToShortDateString()</td>
-                    <td>@item.AttendanceOnDate</td>
-                    <td>@item.Note</td>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ClassAndSectionViewModel.classId)
+                        @Html.DropDownListFor(m => m.ClassAndSectionViewModel.classId,
+                       new SelectList(Model.classes, "Id", "Name"), "Select Class", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ClassAndSectionViewModel.classId,
+                                "", new { @class = "text-danger" })
+                    </div>
 
 
-                    <td><a href="/Attendance/UpdateAttendance/@item.Id" class="btn btn-primary">Edit</a></td>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ClassAndSectionViewModel.sectionId)
+                        @Html.DropDownListFor(m => m.ClassAndSectionViewModel.sectionId,
+                       new SelectList(Model.sections, "Id", "Name"), "Select Class", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ClassAndSectionViewModel.sectionId,
+                                 "", new { @class = "text-danger" })
 
-                </tr>
+                    </div>
+
+
+
+                    @*<div class="form-group">
+                            @Html.LabelFor(m => m.ClassAndSectionViewModel.attendanceDate)
+
+                            @Html.TextBoxFor(m => m.ClassAndSectionViewModel.attendanceDate, "{0:d MMM yyyy}", new { @class = "form-control", Type = "date", id = "datepicker" })
+                            @Html.ValidationMessageFor(m => m.ClassAndSectionViewModel.attendanceDate,
+                                     "", new { @class = "text-danger" })
+
+                        </div>*@
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ClassAndSectionViewModel.attendanceDate)
+
+                        @*@Html.TextBoxFor(m => m.ClassAndSectionViewModel.attendanceDate, "{0:d MMM yyyy}", new { @class = "form-control", id = "datepicker" })*@
+                        @Html.TextBoxFor(m => m.ClassAndSectionViewModel.attendanceDate, "{0:d MMM yyyy}", new { @class = "form-control", type = "date" })
+
+                        @Html.ValidationMessageFor(m => m.ClassAndSectionViewModel.attendanceDate,
+                                 "", new { @class = "text-danger" })
+
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+
                 }
 
 
-                
 
-            </tbody>
-        </table>
 
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;&nbsp;Class&nbsp;Room&nbsp;Name&nbsp;&nbsp; </th>
+                            <th>&nbsp;&nbsp;Attendace&nbsp;of&nbsp;Date&nbsp;&nbsp; </th>
+                            <th>&nbsp;&nbsp;Attendace&nbsp;&nbsp;on&nbsp;&nbsp;Date&nbsp;&nbsp;</th>
+                            <th>&nbsp;&nbsp;Notes&nbsp;&nbsp;</th>
+
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Attendances)
+                        {
+                            <tr>
+                                <td>@item.ClassRoom.Class.Name   @item.ClassRoom.Section.Name</td>
+                                <td>@item.AttendanceOfDate.ToShortDateString()</td>
+                                <td>@item.AttendanceOnDate</td>
+                                <td>@item.Note</td>
+
+
+                                <td><a href="/Attendance/UpdateAttendance/@item.Id" class="btn btn-primary">Edit</a></td>
+
+                            </tr>
+                        }
+
+
+
+
+                    </tbody>
+                </table>
+
+
+            </div>
+
+
+
+
+
+
+
+
+        </div>
 
     </div>
-
-
-
-
-
-
-
 
 </div>
 
 
 
 
+
+
+
+
 @section scripts
 {
-    
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <script>
+
+        //$("#datepicker").datepicker();
+
+        document.getElementById("datepicker").autocomplete = "off";
+        $("#datepicker").datepicker({
+            maxDate: "+0m +0w",
+            minDate: "-1m ",
+            dateFormat: "dd/mm/yy"
+
+        });
+
+                    // Setter
+
+    </script>
+
     @Scripts.Render("~/bundles/jqueryval")
-    
-    }
+
+}
+

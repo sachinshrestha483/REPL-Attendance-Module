@@ -79,7 +79,7 @@ namespace REPLSolutions.Web.Controllers
 
 
 
-            var rules = _context.AcademicCalander.Where(c => c.StartDate <= obj.ClassAndSectionViewModel.attendanceDate && c.EndDate >= obj.ClassAndSectionViewModel.attendanceDate).ToList();
+            var rules = _context.AcademicCalander.Include(s=>s.AcademicCalanderEvent).Where(c => c.StartDate <= obj.ClassAndSectionViewModel.attendanceDate && c.EndDate >= obj.ClassAndSectionViewModel.attendanceDate).ToList();
 
             if (rules.Count() == 0)
             {
@@ -115,13 +115,13 @@ namespace REPLSolutions.Web.Controllers
 
             // check if Not Holiday on that day According to rule \
 
-            var rulesList = rules.Select(s => s.AcademicCalanderRule).ToList();
+            var rulesList = rules.Select(s => s.AcademicCalanderEvent.AcademicCalanderRule).ToList();
             //var latestRule = rulesList[rulesList.Count() - 1];
           //Applying The First Rule..in Array
             var latestRule = rulesList[0];
 
 
-            var flaggedRuleList = rules.Where(r => r.flag == true).Select(s => s.AcademicCalanderRule).ToList();
+            var flaggedRuleList = rules.Where(r => r.flag == true).Select(s => s.AcademicCalanderEvent.AcademicCalanderRule).ToList();
 
             if (flaggedRuleList.Count >= 1)
             {
@@ -308,7 +308,7 @@ namespace REPLSolutions.Web.Controllers
 
                 if (leave == true)
                 {
-                    present = true;
+                    present = false;
                 }
                 attendance.Present =  present;
                 attendance.Leave = leave;
