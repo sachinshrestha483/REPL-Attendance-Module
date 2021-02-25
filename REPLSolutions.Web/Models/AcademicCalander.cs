@@ -49,7 +49,7 @@ namespace REPLSolutions.Web.Models
         public int AcademicCalanderEventId { get; set; }
 
 
-        public AcademicCalanderRule AcademicCalanderRule { get; set; }
+       public AcademicCalanderRule AcademicCalanderRule { get; set; }
 
 
         [Display(Name ="Flag it if you Want This To Override The Other Rules")]

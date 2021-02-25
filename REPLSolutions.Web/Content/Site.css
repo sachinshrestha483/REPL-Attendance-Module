@@ -36,5 +36,34 @@ button {
 
 
 
+.btn {
+    border: 0px solid transparent;
+    border-radius: 0px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+}
 
+.btn-primary, .btn-primary.focus, .btn-primary:focus {
+    background-color: #428BCA !important;
+    border-color: #428BCA;
+}
 
+.btn-primary, .btn-primary.focus, .btn-primary:focus {
+    background-color: #428BCA !important;
+    border-color: #428BCA;
+}
+
+.navbarHeader {
+    background-color: #438EB9;
+}
+
+/*.navbar-inverse {
+    background-color: #438EB9;
+    border-color: #438EB9;
+}*/
+.navbar-inverse {
+    color: #FFFFFF;
+    background-color: #438EB9 !important;
+    border-color: #080808;
+}

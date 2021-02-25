@@ -4,191 +4,208 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Academic Calander</h2>
 
-<div class="row justify-content-md-center">
+<br />
+<br />
+<br />
+<br />
 
-
-    <div class="col-md-4 col-sm-12">
-
-
-
-        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-
+<div class="panel panel-primary">
+    <div class="panel-heading">Academic Calander</div>
+    <div class="panel-body">
 
 
-
-        @using (@Html.BeginForm("AddRules", "AcademicCalander"))
-        {
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.AcademicCalander.StartDate)
-                @Html.TextBoxFor(m => m.AcademicCalander.StartDate, "{0:d MMM yyyy}", new { @class = "form-control", Type = "date" })
+        <div class="row justify-content-md-center">
 
 
-                @Html.ValidationMessageFor(m => m.AcademicCalander.StartDate,
-                        "", new { @class = "text-danger" })
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.AcademicCalander.EndDate)
-                @Html.TextBoxFor(m => m.AcademicCalander.EndDate, "{0:d MMM yyyy}", new { @class = "form-control", Type = "date" })
-
-                @Html.ValidationMessageFor(m => m.AcademicCalander.EndDate,
-                        "", new { @class = "text-danger" })
-            </div>
-
-
-            <div class="form-group">
-                @*@Html.LabelFor(m => m.AcademicCalander.AcademicCalanderEvent.Name)*@
-                @Html.DropDownListFor(m => m.AcademicCalander.AcademicCalanderEventId,
-               new SelectList(Model.AcademicCalanderEvents, "Id", "Name"), "Select Event", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.AcademicCalander.AcademicCalanderEventId,
-                         "", new { @class = "text-danger" })
-
-            </div>
+            <div class="col-md-4 col-sm-12">
 
 
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.AcademicCalander.AcademicCalanderRule)
-                @Html.DropDownListFor(m => m.AcademicCalander.AcademicCalanderRule,
-              EnumHelper.GetSelectList(typeof(AcademicCalanderRule)), "Select Class", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.AcademicCalander.AcademicCalanderRule,
-                         "", new { @class = "text-danger" })
-
-            </div>
-
-
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.AcademicCalander.Note)
-
-                @Html.TextBoxFor(m => m.AcademicCalander.Note, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.AcademicCalander.Note,
-                         "", new { @class = "text-danger" })
-
-            </div>
-
-
-            <div class="form-group">
-
-
-                @Html.CheckBoxFor(m => m.AcademicCalander.flag)
-                @Html.LabelFor(m => m.AcademicCalander.flag)
-
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-
-
-        }
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
 
 
 
-
-    </div>
-
-
-    <div class="col-md-4 col-sm-12">
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">&nbsp;&nbsp;Start&nbsp;Date&nbsp;&nbsp;</th>
-                    <th scope="col">&nbsp;&nbsp;End&nbsp;Date&nbsp;&nbsp;</th>
-                    <th scope="col">Event</th>
-
-                    @*     <th scope="col">Rule</th>*@
-                    <th scope="col">Flag</th>
-                    <th scope="col">Delete</th>
-
-
-
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var rule in Model.CalanderRules)
+                @using (@Html.BeginForm("AddRules", "AcademicCalander"))
                 {
-                    <tr>
-                        <th scope="row">@rule.StartDate.ToShortDateString()</th>
 
-                        <td>@rule.EndDate.ToShortDateString()</td>
-                        <td>@rule.AcademicCalanderEvent.Name</td>
-
-                        @*       <td>@rule.AcademicCalanderRule.ToString()</td>*@
-                        @if (rule.flag)
-                        {
-                            <td>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.AcademicCalander.StartDate)
+                        @Html.TextBoxFor(m => m.AcademicCalander.StartDate, "{0:d MMM yyyy}", new { @class = "form-control", Type = "date" })
 
 
-                                @using (@Html.BeginForm("FlagUnflagRule", "AcademicCalander"))
-                                {
-                                    <input type="hidden" name="id" value="@rule.Id" />
+                        @Html.ValidationMessageFor(m => m.AcademicCalander.StartDate,
+                                "", new { @class = "text-danger" })
+                    </div>
 
-                                    <button type="submit" class="btn btn-primary">Flagged</button>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.AcademicCalander.EndDate)
+                        @Html.TextBoxFor(m => m.AcademicCalander.EndDate, "{0:d MMM yyyy}", new { @class = "form-control", Type = "date" })
 
-                                }
-
-                            </td>
-
-                        }
-                        else
-                        {
-                            <td>
-
-                                @using (@Html.BeginForm("FlagUnflagRule", "AcademicCalander"))
-                                {
-                                    <input type="hidden" name="id" value="@rule.Id" />
-
-                                    <button type="submit" class="btn btn-primary">Unflagged</button>
-
-                                }
+                        @Html.ValidationMessageFor(m => m.AcademicCalander.EndDate,
+                                "", new { @class = "text-danger" })
+                    </div>
 
 
-                            </td>
+                    <div class="form-group">
+                        @*@Html.LabelFor(m => m.AcademicCalander.AcademicCalanderEvent.Name)*@
+                        <label>Select Event</label>
+                        @Html.DropDownListFor(m => m.AcademicCalander.AcademicCalanderEventId,
+                       new SelectList(Model.AcademicCalanderEvents, "Id", "Name"), "Select Event", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.AcademicCalander.AcademicCalanderEventId,
+                                 "", new { @class = "text-danger" })
 
-                        }
-                        <td>
-                            @using (@Html.BeginForm("DeleteRule", "AcademicCalander"))
-                            {
-                                <input type="hidden" name="id" value="@rule.Id" />
+                    </div>
 
-                                <button type="submit" class="btn btn-primary">Delete</button>
 
-                            }
-                        </td>
 
-                    </tr>
+                    @*<div class="form-group">
+                        @Html.LabelFor(m => m.AcademicCalander.AcademicCalanderRule)
+                        @Html.DropDownListFor(m => m.AcademicCalander.AcademicCalanderRule,
+                      EnumHelper.GetSelectList(typeof(AcademicCalanderRule)), "Select Class", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.AcademicCalander.AcademicCalanderRule,
+                                 "", new { @class = "text-danger" })
+
+                    </div>*@
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.AcademicCalander.Note)
+
+                        @Html.TextBoxFor(m => m.AcademicCalander.Note, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.AcademicCalander.Note,
+                                 "", new { @class = "text-danger" })
+
+                    </div>
+
+
+                    <div class="form-group">
+
+
+                        @Html.CheckBoxFor(m => m.AcademicCalander.flag)
+                        @Html.LabelFor(m => m.AcademicCalander.flag)
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
 
                 }
 
 
-            </tbody>
-        </table>
 
 
 
+            </div>
+
+
+            <div class="col-md-4 col-sm-12">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">&nbsp;&nbsp;Start&nbsp;Date&nbsp;&nbsp;</th>
+                            <th scope="col">&nbsp;&nbsp;End&nbsp;Date&nbsp;&nbsp;</th>
+                            <th scope="col">Event</th>
+
+                            @*     <th scope="col">Rule</th>*@
+                            <th scope="col">Flag</th>
+                            <th scope="col">Delete</th>
+
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var rule in Model.CalanderRules)
+                        {
+                            <tr>
+                                <th scope="row">@rule.StartDate.ToShortDateString()</th>
+
+                                <td>@rule.EndDate.ToShortDateString()</td>
+                                <td>@rule.AcademicCalanderEvent.Name</td>
+
+                                @*       <td>@rule.AcademicCalanderRule.ToString()</td>*@
+                                @if (rule.flag)
+                                {
+                                    <td>
+
+
+                                        @using (@Html.BeginForm("FlagUnflagRule", "AcademicCalander"))
+                                        {
+                                            <input type="hidden" name="id" value="@rule.Id" />
+
+                                            <button type="submit" class="btn btn-primary">Flagged</button>
+
+                                        }
+
+                                    </td>
+
+                                }
+                                else
+                                {
+                                    <td>
+
+                                        @using (@Html.BeginForm("FlagUnflagRule", "AcademicCalander"))
+                                        {
+                                            <input type="hidden" name="id" value="@rule.Id" />
+
+                                            <button type="submit" class="btn btn-primary">Unflagged</button>
+
+                                        }
+
+
+                                    </td>
+
+                                }
+                                <td>
+                                    @using (@Html.BeginForm("DeleteRule", "AcademicCalander"))
+                                    {
+                                        <input type="hidden" name="id" value="@rule.Id" />
+
+                                        <button type="submit" class="btn btn-primary">Delete</button>
+
+                                    }
+                                </td>
+
+                            </tr>
+
+                        }
+
+
+                    </tbody>
+                </table>
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+        </div>
 
 
     </div>
-
-
-
-
-
-
-
-
 </div>
+
+
+
 
 
 
 @section scripts
 {
-  
+
     @Scripts.Render("~/bundles/jqueryval")
 
 }
