@@ -62,8 +62,17 @@ button {
     background-color: #438EB9;
     border-color: #438EB9;
 }*/
+
+
+     .navbar-nav > li > a {
+        color: #FFFFFF !important;
+    }
+
 .navbar-inverse {
     color: #FFFFFF;
-    background-color: #438EB9 !important;
+    background-color: #438EB9 ;
     border-color: #080808;
 }
+    .navbar-inverse .navbar-brand {
+        color: #ffffff ;
+    }

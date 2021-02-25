@@ -34,36 +34,58 @@
 
                     <div class="col-md-12 container">
                         <div align="center">
+                            <br />
 
-                            <h3 class="text-capitalize">@Model.AttendanceEntries[i].Student.FirstName</h3>
-                            <h3 class="text-capitalize">@Model.AttendanceEntries[i].Student.MiddleName</h3>
-                            <h3 class="text-capitalize">@Model.AttendanceEntries[i].Student.LastName</h3>
+                            <span class="text-capitalize">@Model.AttendanceEntries[i].Student.FirstName &nbsp;@Model.AttendanceEntries[i].Student.MiddleName &nbsp;@Model.AttendanceEntries[i].Student.LastName </span>
+                            @*<p class="text-capitalize">@Model.AttendanceEntries[i].Student.MiddleName</p>
+        <p class="text-capitalize">@Model.AttendanceEntries[i].Student.LastName</p>*@
                             @Html.HiddenFor(m => Model.AttendanceEntries[i].StudentId)
 
                         </div>
 
                         <div align="center">
-                            <label>Present</label>
-
-                            @Html.CheckBoxFor(
-                           m => Model.AttendanceEntries[i].Present,
-                           new { @class = "form-control",
-                               onclick = "presentClicked(" + @i + ");",
-                               id = "p" + @i })
-                            <br />
-
-                            <br />
-                            <label>Leave</label>
-                            @Html.CheckBoxFor(
-                           m => Model.AttendanceEntries[i].Leave,
-                           new { @class = "form-control",
-                               id = "l" + @i ,
-                               onclick = "leaveClicked(" + @i + ");"
 
 
+                            <div class="row">
 
-                           })
-                        </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Present</label>
+
+                                    @Html.CheckBoxFor(
+                                   m => Model.AttendanceEntries[i].Present,
+                                   new
+                                        {
+                                            @class = "form-control",
+                                       onclick = "presentClicked(" + @i + ");",
+                                       id = "p" + @i
+                                        })
+                                    <br />
+
+                                    <br />
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 ">
+
+                                    <label>Leave</label>
+                                    @Html.CheckBoxFor(
+                                   m => Model.AttendanceEntries[i].Leave,
+                                   new
+                                        {
+                                            @class = "form-control",
+                                       id = "l" + @i,
+                                       onclick = "leaveClicked(" + @i + ");"
+
+
+
+                                   })
+
+                                </div>
+
+                            </div>
+
+
+                       
+                                                 </div>
 
                     </div>
 
